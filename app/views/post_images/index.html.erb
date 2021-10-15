@@ -1,0 +1,17 @@
+<% @post_images.each do |post_image| %>
+<div>
+  <%= link_to post_image_path(post_image.id) do %>
+    <%= attachment_image_tag post_image, :image %>
+  <% end %>
+
+  <p>投稿ユーザー画像<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></p>
+  <p>ユーザーネーム：<%= post_image.user.nickname %></p>
+  <p>タイトル：<%= post_image.title %></p>
+  <p>内容：<%= post_image.body %></p>
+  　<% post_image.tag_list.each do |tag| %>
+       <%= tag %>
+    <% end %>
+  <p><%= link_to "#{post_image.post_comments.count} コメント", post_image_path(post_image.id) %></p>
+</div>
+<% end %>
+<%#= paginate @post_images %>
