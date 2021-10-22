@@ -1,0 +1,39 @@
+<div>
+  <%= attachment_image_tag @post_image, :image %>
+  <p>タイトル：<%= @post_image.title %></p>
+  <p>説明：<%= @post_image.body %></p>
+  <p>ニックネーム：<%= @post_image.user.nickname %></p>
+  <p>投稿日時：<%= @post_image.created_at.strftime('%Y/%m/%d') %></p>
+</div>
+
+<div>
+<p>コメント件数：<%= @post_image.post_comments.count %></p>
+<% @post_image.post_comments.each do |post_comment| %>
+  <%= post_comment.user.nickname %><%= attachment_image_tag post_comment.user, :profile_image, fallback: "no_image.jpg", size: "100x100" %>
+  <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+  <% if post_comment.user == current_user %>
+  <div>
+    <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
+<% if @post_image.favorited_by?(current_user) %>
+  <p>
+    <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+      ♥<%= @post_image.favorites.count %> いいね
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+      ♡<%= @post_image.favorites.count %> いいね
+    <% end %>
+  </p>
+<% end %>
+</div>
+<div>
+<%= form_with(model:[@post_image, @post_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>

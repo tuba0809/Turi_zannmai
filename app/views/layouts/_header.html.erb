@@ -1,0 +1,39 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>釣り三昧</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li><%= link_to ' 新規投稿', new_post_image_path,class: 'nav-link text-light' %></li>
+          <li><%= link_to ' マイページ',user_path(current_user),class: 'nav-link text-light' %></li>
+          <li><%= link_to ' 記事一覧',post_images_path ,class: 'nav-link text-light'%></li>
+          <li><%= link_to ' お問い合わせ', new_contact_path ,class: 'nav-link text-light'%></li>
+          <li><%= link_to ' ログアウト', destroy_user_session_path, method: :delete,class: 'nav-link text-light' %></li>
+        <% else %>
+          <li><%= link_to ' Home',root_path,class: 'nav-link text-light' %></li>
+          <li><%#= link_to ' About',home_about_path,class: 'nav-link text-light' %></li>
+          <li><%= link_to ' 新規登録', new_user_registration_path,class: 'nav-link text-light' %></li>
+          <li><%= link_to ' ログイン', new_user_session_path ,class: 'nav-link text-light'%></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div id="text-center-wrap">
+    <div id="text-center">
+      <% if user_signed_in? %>
+        <%= form_with(method: :get, url:search_path, local:true) do |form| %>
+      　　<%= select_tag 'range' ,options_for_select([['ニックネーム', '1'], ['記事', '2']]) %>
+          <%= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+          <%= text_field_tag (:word) %>
+        　<%= submit_tag "検索" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  </div>
+</header>
