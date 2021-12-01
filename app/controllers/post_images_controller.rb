@@ -19,7 +19,7 @@ class PostImagesController < ApplicationController
     @post_image = PostImage.find(params[:id])
     @post_comment = PostComment.new
   end
-
+#記事削除
   def destroy
   end
   
