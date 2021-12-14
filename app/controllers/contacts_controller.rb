@@ -12,6 +12,7 @@ class ContactsController < ApplicationController
       ContactMailer.contact_mail(@contact).deliver
       redirect_to new_contact_path
     else
+      #リダイレクト
       redirect_to new_cntact_path
     end
   end
