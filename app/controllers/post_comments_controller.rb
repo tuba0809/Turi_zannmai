@@ -1,5 +1,5 @@
 class PostCommentsController < ApplicationController
-
+#コメント作成
   def create
     post_image = PostImage.find(params[:post_image_id])
     comment = PostComment.new(post_comment_params)
@@ -8,7 +8,7 @@ class PostCommentsController < ApplicationController
     comment.save
     redirect_to post_image_path(post_image)
   end
-
+#コメント
   def destroy
     PostComment.find_by(id: params[:id]).destroy
     redirect_to post_image_path(params[:post_image_id])
