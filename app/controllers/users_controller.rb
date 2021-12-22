@@ -8,13 +8,13 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  #ユーザ
+  #ユーザ更新
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user.id)
   end
-  
+  #プライベート
   private
 
   def user_params
