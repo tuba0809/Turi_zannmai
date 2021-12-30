@@ -4,11 +4,11 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      @post_images = @user.post_images.page(params[:page]).reverse_order
   end
-  #ユーザ
+  #ユーザ修正
   def edit
     @user = User.find(params[:id])
   end
-  
+  #ユーザ
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
