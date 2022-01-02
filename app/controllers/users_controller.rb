@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   end
   #プライベート
   private
-
+  #パラメータ
+  
   def user_params
     params.require(:user).permit(:nickname, :profile_image)
   end
