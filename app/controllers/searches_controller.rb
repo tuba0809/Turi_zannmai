@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
         @range = params[:range]
         search = params[:search]
         @word = params[:word]
-        
+        #検索
         if @range == '1'
         @user = User.search(search,@word)
         else
