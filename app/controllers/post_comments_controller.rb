@@ -15,7 +15,7 @@ class PostCommentsController < ApplicationController
   end
 
   private
-
+#コメントのパラメータ
   def post_comment_params
     params.require(:post_comment).permit(:comment)
   end
